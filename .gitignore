@@ -29,3 +29,12 @@ coverage
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# Hardhat artifacts directory
+artifacts
+
+# Hardhat cache directory
+cache
+
+# Hardhat coverage file
+coverage.json
