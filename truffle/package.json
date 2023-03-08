@@ -10,6 +10,7 @@
     "@truffle/hdwallet-provider": "^2.1.7"
   },
   "devDependencies": {
-    "@openzeppelin/test-helpers": "^0.5.16"
+    "@openzeppelin/test-helpers": "^0.5.16",
+    "eth-gas-reporter": "^0.2.25"
   }
 }
