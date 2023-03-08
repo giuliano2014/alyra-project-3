@@ -1,6 +1,6 @@
 import { useRef, useEffect } from "react";
 
-function Contract({ value }) {
+const Contract = ({ value }) => {
   const spanEle = useRef(null);
 
   useEffect(() => {
