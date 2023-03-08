@@ -1,4 +1,4 @@
-function Desc() {
+const Desc = () => {
   return (
     <>
       <p>

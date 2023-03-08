@@ -1,4 +1,4 @@
-function NoticeNoArtifact() {
+const NoticeNoArtifact = () => {
   return (
     <p>
       ⚠️ Cannot find <span className="code">SimpleStorage</span> contract artifact.
