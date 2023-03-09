@@ -10,14 +10,14 @@ You must complete these 3 steps to get the project working locally.
 Start the locale node.
 
 ```sh
-$ cd client
+$ cd truffle
 $ ganache
 ```
 
 Deploy the contracts.
 
 ```sh
-$ cd client
+$ cd truffle
 $ truffle migrate --reset
 ```
 
