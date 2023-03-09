@@ -1,8 +1,21 @@
+import { useEffect, useState } from "react";
+
 import useEth from "../../contexts/EthContext/useEth";
 import AddVoter from "./AddVoter";
 
 const OwnerContainer = () => {
   const { state: { accounts, contract } } = useEth();
+  const [isOwner, setIsOwner] = useState(false);
+
+  const getOwnerAddress = async () => {
+    if (!contract) return;
+    const ownerAddress = await contract.methods.owner().call();
+    accounts[0] === ownerAddress ? setIsOwner(true) : setIsOwner(false);
+  }
+
+  useEffect(() => { getOwnerAddress() }, [contract]);
+
+  if (!isOwner) return null;
 
   return (
     <div>
