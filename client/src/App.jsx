@@ -1,6 +1,5 @@
 import { EthProvider } from "./contexts/EthContext";
 
-import Demo from "./components/Demo";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import OwnerContainer from "./components/Owner/OwnerContainer";
 import VoterContainer from "./components/Voter/VoterContainer";
@@ -19,8 +18,6 @@ const App = () => {
           <OwnerContainer />
           <hr />
           <VoterContainer />
-          <hr />
-          <Demo />
           <hr />
         </div>
       </div>
