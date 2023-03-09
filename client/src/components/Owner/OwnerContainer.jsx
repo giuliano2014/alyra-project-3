@@ -1,12 +1,13 @@
+import useEth from "../../contexts/EthContext/useEth";
+import AddVoter from "./AddVoter";
+
 const OwnerContainer = () => {
+  const { state: { accounts, contract } } = useEth();
+
   return (
     <div>
       <h2>Owner</h2>
-      <div>
-        <label htmlFor="voterAddress">Add a voter</label>
-        <input id="voterAddress" type="text" placeholder="Address" />
-        <button>addVoter</button>
-      </div>
+      <AddVoter accounts={accounts} contract={contract} />
       <div>
         <label>Start proposals registering</label>
         <button>startProposalsRegistering</button>
@@ -29,6 +30,6 @@ const OwnerContainer = () => {
       </div>
     </div>
   );
-}
+};
 
 export default OwnerContainer;
