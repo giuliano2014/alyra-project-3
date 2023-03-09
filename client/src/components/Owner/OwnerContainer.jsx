@@ -23,7 +23,7 @@ const OwnerContainer = () => {
       <AddVoter accounts={accounts} contract={contract} />
       <div>
         <label>Start proposals registering</label>
-        <button>startProposalsRegistering</button>
+        <button onClick={StartProposal}>startProposalsRegistering</button>
       </div>
       <div>
         <label>End proposals registering</label>
@@ -41,6 +41,7 @@ const OwnerContainer = () => {
         <label>Tally votes</label>
         <button>tallyVotes</button>
       </div>
+      {error}
     </div>
   );
 };
