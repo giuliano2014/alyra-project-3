@@ -6,6 +6,8 @@ import StartProposal from "./StartProposal";
 import EndProposal from "./EndProposal";
 import StartVoting from "./StartVoting";
 import EndVoting from "./EndVoting";
+import TallyVotes from "./TallyVotes";
+
 
 
 
@@ -40,8 +42,7 @@ const OwnerContainer = () => {
         <EndVoting accounts={accounts} contract={contract} />
       </div>
       <div>
-        <label>Tally votes</label>
-        <button>tallyVotes</button>
+        <TallyVotes accounts={accounts} contract={contract} />
       </div>
     </div>
   );
