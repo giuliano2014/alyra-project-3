@@ -14,9 +14,7 @@ const App = () => {
           <HeaderContainer />
           <hr />
           <VotingInformationContainer />
-          <hr />
           <OwnerContainer />
-          <hr />
           <VoterContainer />
           <hr />
         </div>

@@ -6,6 +6,7 @@ const VoterContainer = () => {
 
   return (
     <div>
+      <hr />
       <h2>Voter</h2>
       <div>
         <label htmlFor="voterAddress">Get a specific voter</label>
