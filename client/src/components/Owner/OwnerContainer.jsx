@@ -4,6 +4,8 @@ import useEth from "../../contexts/EthContext/useEth";
 import AddVoter from "./AddVoter";
 import StartProposal from "./StartProposal";
 import EndProposal from "./EndProposal";
+import StartVoting from "./StartVoting";
+
 
 
 const OwnerContainer = () => {
@@ -30,8 +32,7 @@ const OwnerContainer = () => {
         <EndProposal accounts={accounts} contract={contract} />
       </div>
       <div>
-        <label>Start voting session</label>
-        <button>startVotingSession</button>
+        <StartVoting accounts={accounts} contract={contract} />
       </div>
       <div>
         <label>End voting session</label>
