@@ -20026,11 +20026,21 @@
       "links": {},
       "address": "0x2488C450737f9e9Ca74E272cBB8542bBcB131a14",
       "transactionHash": "0x4b55dc8ded03b375b5a457a0b9912e0b3ce51df17bf3b87a14329dc451590c1a"
+    },
+    "1678438813228": {
+      "events": {},
+      "links": {},
+      "address": "0x9d272D1d276316aE16F42e2b8270C5f38cD1B187",
+      "transactionHash": "0x270b07d06a7d7499dea2ed3c8d582f7179e165a8eb370752f75820fafee926f8"
     }
   },
   "schemaVersion": "3.4.11",
+<<<<<<< HEAD
   "updatedAt": "2023-03-09T14:08:37.264Z",
 >>>>>>> cd04061 (startProposal work)
+=======
+  "updatedAt": "2023-03-10T10:08:23.515Z",
+>>>>>>> 89589bf (refacto start proposal)
   "networkType": "ethereum",
   "devdoc": {
     "kind": "dev",
