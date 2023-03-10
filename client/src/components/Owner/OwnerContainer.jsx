@@ -2,15 +2,11 @@ import { useEffect, useState } from "react";
 
 import useEth from "../../contexts/EthContext/useEth";
 import AddVoter from "./AddVoter";
-import StartProposal from "./StartProposal";
 import EndProposal from "./EndProposal";
-import StartVoting from "./StartVoting";
 import EndVoting from "./EndVoting";
+import StartProposal from "./StartProposal";
+import StartVoting from "./StartVoting";
 import TallyVotes from "./TallyVotes";
-
-
-
-
 
 const OwnerContainer = () => {
   const { state: { accounts, contract } } = useEth();
@@ -32,9 +28,7 @@ const OwnerContainer = () => {
       <h2>Owner</h2>
       <AddVoter accounts={accounts} contract={contract} />
       <StartProposal accounts={accounts} contract={contract} />
-      <div>
-        <EndProposal accounts={accounts} contract={contract} />
-      </div>
+      <EndProposal accounts={accounts} contract={contract} />
       <div>
         <StartVoting accounts={accounts} contract={contract} />
       </div>

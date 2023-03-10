@@ -1,16 +1,15 @@
 import { useState } from "react";
 
 const EndProposal = ({ accounts, contract }) => {
-    const [error, setError] = useState()
+    const [error, setError] = useState();
 
-    const endProposal = () => {
-        contract.methods.endProposalsRegistering().call({ from: accounts[0] })
-            .then(result => {
-                return contract.methods.endProposalsRegistering().send({ from: accounts[0] });
-            })
-            .catch(error => {
-                setError(error.message.match(/revert (.*)/)[1]);
-            });
+    const endProposal = async () => {
+        try {
+            await contract.methods.endProposalsRegistering().call({ from: accounts[0] });
+            await contract.methods.endProposalsRegistering().send({ from: accounts[0] });
+        } catch (error) {
+            setError(error.message.match(/revert (.*)/)[1]);
+        }
     };
 
     return (
