@@ -20,6 +20,7 @@ const OwnerContainer = () => {
 
   return (
     <div>
+      <hr />
       <h2>Owner</h2>
       <AddVoter accounts={accounts} contract={contract} />
       <StartProposal accounts={accounts} contract={contract} />
