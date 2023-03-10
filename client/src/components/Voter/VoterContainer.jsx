@@ -1,4 +1,9 @@
+import useEth from "../../contexts/EthContext/useEth";
+import AddProposal from "./AddProposal";
+
 const VoterContainer = () => {
+  const { state: { accounts, contract } } = useEth();
+
   return (
     <div>
       <h2>Voter</h2>
@@ -13,9 +18,7 @@ const VoterContainer = () => {
         <button>getOneProposal</button>
       </div>
       <div>
-        <label htmlFor="newProposal">Add a proposal</label>
-        <input id="newProposal" type="text" placeholder="Description" />
-        <button>addProposal</button>
+        <AddProposal accounts={accounts} contract={contract} />
       </div>
       <div>
         <label htmlFor="proposalChoice">Set your vote</label>
