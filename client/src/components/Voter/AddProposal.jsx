@@ -24,7 +24,7 @@ const AddProposal = ({ accounts, contract }) => {
 
     return (
         <div>
-            <label for="description">Add a proposal description</label>
+            <label htmlFor="description">Add a proposal description</label>
             <input
                 id="description"
                 onChange={handleInputChange}
