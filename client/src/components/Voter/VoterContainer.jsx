@@ -1,6 +1,7 @@
 import useEth from "../../contexts/EthContext/useEth";
 import AddProposal from "./AddProposal";
 import GetOneProposal from "./GetOneProposal";
+import SetVote from "./SetVote";
 
 
 const VoterContainer = () => {
@@ -22,9 +23,7 @@ const VoterContainer = () => {
         <AddProposal accounts={accounts} contract={contract} />
       </div>
       <div>
-        <label htmlFor="proposalChoice">Set your vote</label>
-        <input id="proposalChoice" type="number" placeholder="Enter a number" />
-        <button>setVote</button>
+        <SetVote accounts={accounts} contract={contract} />
       </div>
     </div>
   );
