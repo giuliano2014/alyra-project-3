@@ -5,6 +5,8 @@ import AddVoter from "./AddVoter";
 import StartProposal from "./StartProposal";
 import EndProposal from "./EndProposal";
 import StartVoting from "./StartVoting";
+import EndVoting from "./EndVoting";
+
 
 
 
@@ -35,8 +37,7 @@ const OwnerContainer = () => {
         <StartVoting accounts={accounts} contract={contract} />
       </div>
       <div>
-        <label>End voting session</label>
-        <button>endVotingSession</button>
+        <EndVoting accounts={accounts} contract={contract} />
       </div>
       <div>
         <label>Tally votes</label>
