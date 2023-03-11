@@ -3,7 +3,6 @@ import AddProposal from "./AddProposal";
 import GetOneProposal from "./GetOneProposal";
 import SetVote from "./SetVote";
 
-
 const VoterContainer = () => {
     const { state: { accounts, contract } } = useEth();
 
