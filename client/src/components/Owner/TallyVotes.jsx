@@ -1,12 +1,12 @@
 import { useState } from "react";
 
 const TallyVotes = ({ accounts, contract }) => {
-    const [error, setError] = useState()
+    const [error, setError] = useState();
 
     const tallyVotes = () => {
         contract.methods.tallyVotes().call({ from: accounts[0] })
             .then(result => {
-                return contract.methods.tallyVotes().send({ from: accounts[0] });
+                contract.methods.tallyVotes().send({ from: accounts[0] });
             })
             .catch(error => {
                 setError(error.message.match(/revert (.*)/)[1]);
@@ -19,7 +19,7 @@ const TallyVotes = ({ accounts, contract }) => {
             <button onClick={tallyVotes}>tallyVotes</button>
             {error}
         </div>
-    )
+    );
 }
 
 export default TallyVotes;

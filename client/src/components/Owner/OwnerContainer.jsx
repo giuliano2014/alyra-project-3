@@ -31,9 +31,7 @@ const OwnerContainer = () => {
             <EndProposal accounts={accounts} contract={contract} />
             <StartVoting accounts={accounts} contract={contract} />
             <EndVoting accounts={accounts} contract={contract} />
-            <div>
-                <TallyVotes accounts={accounts} contract={contract} />
-            </div>
+            <TallyVotes accounts={accounts} contract={contract} />
         </div>
     );
 };
