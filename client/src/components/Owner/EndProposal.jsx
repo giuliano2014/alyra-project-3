@@ -3,7 +3,7 @@ import { useState } from "react";
 const EndProposal = ({ accounts, contract }) => {
     const [error, setError] = useState();
 
-    const endProposal = async () => {
+    const endProposalsRegistering = async () => {
         try {
             await contract.methods.endProposalsRegistering().call({ from: accounts[0] });
             await contract.methods.endProposalsRegistering().send({ from: accounts[0] });
@@ -14,11 +14,11 @@ const EndProposal = ({ accounts, contract }) => {
 
     return (
         <div>
-            <label>end proposals registering</label>
-            <button onClick={endProposal}>endProposalsRegistering</button>
+            <label>End proposals registering</label>
+            <button onClick={endProposalsRegistering}>endProposalsRegistering</button>
             {error}
         </div>
-    )
+    );
 }
 
 export default EndProposal;

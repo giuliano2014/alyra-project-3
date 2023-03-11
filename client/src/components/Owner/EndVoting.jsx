@@ -15,11 +15,11 @@ const EndVoting = ({ accounts, contract }) => {
 
     return (
         <div>
-            <label>end Voting Session</label>
+            <label>End voting session</label>
             <button onClick={endVotingSession}>endVotingSession</button>
             {error}
         </div>
-    )
+    );
 }
 
 export default EndVoting;

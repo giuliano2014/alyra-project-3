@@ -15,7 +15,7 @@ const TallyVotes = ({ accounts, contract }) => {
 
     return (
         <div>
-            <label>Tally Votes</label>
+            <label>Tally votes</label>
             <button onClick={tallyVotes}>tallyVotes</button>
             {error}
         </div>

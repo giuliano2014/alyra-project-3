@@ -1,15 +1,9 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 const GetOneProposal = ({ accounts, contract }) => {
     const [error, setError] = useState();
     const [proposal, setProposal] = useState({});
     const [proposalId, setProposalId] = useState("");
-
-    const handleInputChange = e => {
-        if (/^\d+$|^$/.test(e.target.value)) {
-            setProposalId(e.target.value);
-        }
-    };
 
     const getOneProposal = async () => {
         if (!proposalId) {
@@ -25,25 +19,27 @@ const GetOneProposal = ({ accounts, contract }) => {
         }
     };
 
-    useEffect(() => {
-        console.log("proposal", proposal);
-    }, [proposal]);
+    const handleInputChange = e => {
+        if (/^\d+$|^$/.test(e.target.value)) {
+            setProposalId(e.target.value);
+        }
+    };
 
     return (
         <div>
-            <label htmlFor="proposalId">Get a specific Proposal</label>
+            <label htmlFor="proposal-id">Get a specific Proposal</label>
             <input
-                id="proposalId"
-                type="text"
+                id="proposal-id"
                 onChange={handleInputChange}
-                placeholder="Number"
+                placeholder="Proposal ID"
+                type="text"
                 value={proposalId}
             />
             <button onClick={getOneProposal}>getOneProposal</button>
-            <span>description {proposal.description} / voteCount {proposal.voteCount}</span>
+            <span>Description {proposal.description} / Vote count {proposal.voteCount}</span>
             {error}
         </div>
-    )
+    );
 }
 
 export default GetOneProposal;

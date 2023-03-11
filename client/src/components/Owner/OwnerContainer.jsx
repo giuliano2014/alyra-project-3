@@ -13,14 +13,15 @@ const OwnerContainer = () => {
     const [isOwner, setIsOwner] = useState(false);
 
     const getOwnerAddress = async () => {
-    if (!contract) return;
-    const ownerAddress = await contract.methods.owner().call();
-    accounts[0] === ownerAddress ? setIsOwner(true) : setIsOwner(false);
+        if (!contract) return;
+
+        const ownerAddress = await contract.methods.owner().call();
+        accounts[0] === ownerAddress ? setIsOwner(true) : setIsOwner(false);
     }
 
     useEffect(() => { getOwnerAddress() }, [contract]);
 
-    // if (!isOwner) return null;
+    if (!isOwner) return null;
 
     return (
         <div>

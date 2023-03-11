@@ -10,7 +10,7 @@ const SetVote = ({ accounts, contract }) => {
         }
     };
 
-    const handleVote = async () => {
+    const setVote = () => {
         if (!proposalId) {
             alert("Please enter a correct proposal ID");
             return;
@@ -35,7 +35,7 @@ const SetVote = ({ accounts, contract }) => {
                 type="text"
                 value={proposalId}
             />
-            <button onClick={handleVote}>setVote</button>
+            <button onClick={setVote}>setVote</button>
             {error}
         </div>
     );

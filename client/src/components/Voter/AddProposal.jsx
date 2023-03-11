@@ -4,14 +4,15 @@ const AddProposal = ({ accounts, contract }) => {
     const [description, setDescription] = useState("");
     const [error, setError] = useState();
 
-    const handleAddProposal = async () => {
+    const addProposal = () => {
         if (description === "") {
             setError("Please enter a description");
             return;
         }
+
         contract.methods.addProposal(description).call({ from: accounts[0] })
             .then(result => {
-                return contract.methods.addProposal(description).send({ from: accounts[0] });
+                contract.methods.addProposal(description).send({ from: accounts[0] });
             })
             .catch(error => {
                 setError(error.message.match(/revert (.*)/)[1]);
@@ -24,15 +25,15 @@ const AddProposal = ({ accounts, contract }) => {
 
     return (
         <div>
-            <label htmlFor="description">Add a proposal description</label>
+            <label htmlFor="proposal-description">Add a proposal description</label>
             <input
-                id="description"
+                id="proposal-description"
                 onChange={handleInputChange}
-                placeholder="description"
+                placeholder="Description"
                 type="text"
                 value={description}
             />
-            <button onClick={handleAddProposal}>addProposal</button>
+            <button onClick={addProposal}>addProposal</button>
             {error}
         </div>
     );

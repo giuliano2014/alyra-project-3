@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 const StartVoting = ({ accounts, contract }) => {
-    const [error, setError] = useState()
+    const [error, setError] = useState();
 
     const startVotingSession = () => {
         contract.methods.startVotingSession().call({ from: accounts[0] })
@@ -15,11 +15,11 @@ const StartVoting = ({ accounts, contract }) => {
 
     return (
         <div>
-            <label>Start Voting Session</label>
+            <label>Start voting session</label>
             <button onClick={startVotingSession}>startVotingSession</button>
             {error}
         </div>
-    )
+    );
 }
 
 export default StartVoting;
