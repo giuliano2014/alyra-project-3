@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const ProposalList = ({ contract }) => {
+const ProposalList = ({ accounts, contract }) => {
     const [error, setError] = useState();
     const [isNewProposal, setIsNewProposal] = useState(false);
     const [proposals, setProposals] = useState([]);
@@ -30,20 +30,25 @@ const ProposalList = ({ contract }) => {
 
     const getProposals = async () => {
         if (!contract) return;
-
-        
+    
         try {
             const events = await contract.getPastEvents('ProposalRegistered', {
                 fromBlock: 0,
                 toBlock: 'latest'
             });
+            
             setIsNewProposal(false);
-            const tempProposals = events.map(event => event.returnValues[0]);
-            setProposals([...tempProposals]);
+    
+            const getEachProposalsData = await Promise.all(
+                events.map(event => contract.methods.getOneProposal(event.returnValues.proposalId).call({ from: accounts[0] }))
+            );
+            const getEachProposalsDescription = getEachProposalsData.map(proposal => proposal.description);
+            setProposals([...getEachProposalsDescription]);
         } catch (error) {
             setError(error);
         }
     };
+    
 
     const voterRegisteredEvent = () => {
         if (!contract) return;
@@ -65,7 +70,7 @@ const ProposalList = ({ contract }) => {
             {proposals.length > 0 && 
                 <ul>
                     {proposals.map((proposal, index) => (
-                        <li key={index}>{proposal}</li>
+                        <li key={index}>ID {++index} / Description {proposal}</li>
                     ))}
                 </ul>
             }

@@ -21,7 +21,7 @@ const OwnerContainer = () => {
 
     useEffect(() => { getOwnerAddress() }, [contract]);
 
-    // if (!isOwner) return null;
+    if (!isOwner) return null;
 
     return (
         <div>
