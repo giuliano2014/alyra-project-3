@@ -1,81 +1,74 @@
 import { useEffect, useState } from "react";
 
-const ProposalList = ({ accounts, contract }) => {
+const ProposalList = ({ contract }) => {
     const [error, setError] = useState();
+    const [isNewProposal, setIsNewProposal] = useState(false);
     const [proposals, setProposals] = useState([]);
 
     useEffect(() => {
         getProposals();
-        console.log("proposals", proposals);
-    }, [contract]);
+    }, [contract, isNewProposal]);
 
-    const getProposals = () => {
-        if (!contract) {
-            return;
-        }
+    useEffect(() => {
+        voterRegisteredEvent();
+    }, [proposals]);
 
-        contract.getPastEvents('ProposalRegistered', {
-            fromBlock: 0,
-            toBlock: 'latest'
-        }).then( events => {
-            let tempProposals = [];
-            events.forEach(event => {
-                // console.log('event.returnValues.proposalId', event.returnValues.proposalId);
-                // console.log('event.returnValues[0]', event.returnValues[0]);
-                tempProposals = [...tempProposals, ...event.returnValues[0]];
-            });
-            setProposals([...tempProposals]);
-
-            // let oldies = [];
-            // events.forEach(event => {
-            //     // console.log('event.returnValues[0]', event.returnValues[0]);
-            //     oldies.push(event.returnValues.proposalId);
-            // });
-            // setProposals(oldies);
-
-        }).then( error => {
-            console.log("error", error);
-        });
-    };
-
-    // useEffect(() => {
-    //     (async function () {
-    //       let oldEvents= await contract.getPastEvents('ValueChanged', {
+    // const getProposals = () => {
+    //     if (!contract) return;
+    
+    //     contract.getPastEvents('ProposalRegistered', {
     //         fromBlock: 0,
     //         toBlock: 'latest'
-    //       });
-    //       let oldies=[];
-    
-    //       oldEvents.forEach(event => {
-    //           console.log('event', event);
-    //           oldies.push(event.returnValues.newValue);
-    //       });
-    
-    //       setOldEvents(oldies);
-    
-    //       await contract.events.ValueChanged({fromBlock:"earliest"})
-    //         .on('data', event => {
-    //           let lesevents = event.returnValues.newValue;
-    //           setEventValue(lesevents);
-    //         })          
-    //         .on('changed', changed => console.log(changed))
-    //         .on('error', err => console.log(err))
-    //         .on('connected', str => console.log(str))
-    //     })();
-    //   }, [contract]);
+    //     }).then(events => {
+    //         setIsNewProposal(false);
+    //         const tempProposals = events.map((event) => event.returnValues[0]);
+    //         setProposals([...tempProposals]);
+    //     }).catch(error => {
+    //         setError(error);
+    //     });
+    // };
+
+    const getProposals = async () => {
+        if (!contract) return;
+
+        
+        try {
+            const events = await contract.getPastEvents('ProposalRegistered', {
+                fromBlock: 0,
+                toBlock: 'latest'
+            });
+            setIsNewProposal(false);
+            const tempProposals = events.map(event => event.returnValues[0]);
+            setProposals([...tempProposals]);
+        } catch (error) {
+            setError(error);
+        }
+    };
+
+    const voterRegisteredEvent = () => {
+        if (!contract) return;
+
+        contract.events.ProposalRegistered({ fromBlock: "earliest" })
+            .on('data', event => {
+                setIsNewProposal(true);
+            })
+            .on('error', (error, receipt) => {
+                console.log('receipt', receipt);
+                setError(error);
+            });
+    };
     
     return (
         <div>
             <h2>Proposal list</h2>
-            {/* {proposals} */}
             {error}
-            <div>
+            {proposals.length > 0 && 
                 <ul>
-                {proposals.map((proposal, index) => (
-                    <li key={index}>{proposal}</li>
-                ))}
+                    {proposals.map((proposal, index) => (
+                        <li key={index}>{proposal}</li>
+                    ))}
                 </ul>
-            </div>
+            }
         </div>
     );
 };
