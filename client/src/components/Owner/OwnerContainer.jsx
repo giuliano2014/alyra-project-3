@@ -2,46 +2,39 @@ import { useEffect, useState } from "react";
 
 import useEth from "../../contexts/EthContext/useEth";
 import AddVoter from "./AddVoter";
+import EndProposal from "./EndProposal";
+import EndVoting from "./EndVoting";
 import StartProposal from "./StartProposal";
+import StartVoting from "./StartVoting";
+import TallyVotes from "./TallyVotes";
 
 const OwnerContainer = () => {
-  const { state: { accounts, contract } } = useEth();
-  const [isOwner, setIsOwner] = useState(false);
+    const { state: { accounts, contract } } = useEth();
+    const [isOwner, setIsOwner] = useState(false);
 
-  const getOwnerAddress = async () => {
-    if (!contract) return;
-    const ownerAddress = await contract.methods.owner().call();
-    accounts[0] === ownerAddress ? setIsOwner(true) : setIsOwner(false);
-  }
+    const getOwnerAddress = async () => {
+        if (!contract) return;
 
-  useEffect(() => { getOwnerAddress() }, [contract]);
+        const ownerAddress = await contract.methods.owner().call();
+        accounts[0] === ownerAddress ? setIsOwner(true) : setIsOwner(false);
+    }
 
-  if (!isOwner) return null;
+    useEffect(() => { getOwnerAddress() }, [contract]);
 
-  return (
-    <div>
-      <hr />
-      <h2>Owner</h2>
-      <AddVoter accounts={accounts} contract={contract} />
-      <StartProposal accounts={accounts} contract={contract} />
-      <div>
-        <label>End proposals registering</label>
-        <button>endProposalsRegistering</button>
-      </div>
-      <div>
-        <label>Start voting session</label>
-        <button>startVotingSession</button>
-      </div>
-      <div>
-        <label>End voting session</label>
-        <button>endVotingSession</button>
-      </div>
-      <div>
-        <label>Tally votes</label>
-        <button>tallyVotes</button>
-      </div>
-    </div>
-  );
+    if (!isOwner) return null;
+
+    return (
+        <div>
+            <hr />
+            <h2>Owner</h2>
+            <AddVoter accounts={accounts} contract={contract} />
+            <StartProposal accounts={accounts} contract={contract} />
+            <EndProposal accounts={accounts} contract={contract} />
+            <StartVoting accounts={accounts} contract={contract} />
+            <EndVoting accounts={accounts} contract={contract} />
+            <TallyVotes accounts={accounts} contract={contract} />
+        </div>
+    );
 };
 
 export default OwnerContainer;
