@@ -29,9 +29,7 @@ const OwnerContainer = () => {
       <AddVoter accounts={accounts} contract={contract} />
       <StartProposal accounts={accounts} contract={contract} />
       <EndProposal accounts={accounts} contract={contract} />
-      <div>
-        <StartVoting accounts={accounts} contract={contract} />
-      </div>
+      <StartVoting accounts={accounts} contract={contract} />
       <div>
         <EndVoting accounts={accounts} contract={contract} />
       </div>

@@ -6,7 +6,7 @@ const StartVoting = ({ accounts, contract }) => {
     const startVotingSession = () => {
         contract.methods.startVotingSession().call({ from: accounts[0] })
             .then(result => {
-                return contract.methods.startVotingSession().send({ from: accounts[0] });
+                contract.methods.startVotingSession().send({ from: accounts[0] });
             })
             .catch(error => {
                 setError(error.message.match(/revert (.*)/)[1]);
