@@ -13,7 +13,7 @@ const GetOneProposal = ({ accounts, contract }) => {
 
     const getOneProposal = async () => {
         if (!proposalId) {
-            alert("Please enter a correct proposalId");
+            alert("Please enter a correct proposal ID");
             return;
         }
 

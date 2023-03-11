@@ -1,39 +1,42 @@
 import { useState } from "react";
 
 const SetVote = ({ accounts, contract }) => {
-    const [uint, setUint] = useState("");
-    const [error, setError] = useState()
+    const [error, setError] = useState();
+    const [proposalId, setProposalId] = useState("");
 
+    const handleInputChange = (event) => {
+        if (/^\d+$|^$/.test(event.target.value)) {
+            setProposalId(event.target.value);
+        }
+    };
 
     const handleVote = async () => {
-        contract.methods.setVote(uint).call({ from: accounts[0] })
+        if (!proposalId) {
+            alert("Please enter a correct proposal ID");
+            return;
+        }
+    
+        contract.methods.setVote(proposalId).call({ from: accounts[0] })
             .then(result => {
-                return contract.methods.setVote(uint).send({ from: accounts[0] });
+                contract.methods.setVote(proposalId).send({ from: accounts[0] });
             })
             .catch(error => {
                 setError(error.message.match(/revert (.*)/)[1]);
             });
     };
 
-    const handleInputChange = (event) => {
-        if (/^\d+$|^$/.test(event.target.value)) {
-            setUint(event.target.value);
-        }
-    };
-
     return (
         <div>
-            <label htmlFor="description">set your vote</label>
+            <label htmlFor="set-your-vote">Set your vote</label>
             <input
-                id="uint"
-                type="text"
-                placeholder="uint"
-                value={uint}
+                id="set-your-vote"
                 onChange={handleInputChange}
+                placeholder="Proposal ID"
+                type="text"
+                value={proposalId}
             />
             <button onClick={handleVote}>setVote</button>
             {error}
-
         </div>
     );
 };
