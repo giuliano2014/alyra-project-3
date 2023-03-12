@@ -45,7 +45,7 @@ const ProposalList = ({ accounts, contract }) => {
             const getEachProposalsDescription = getEachProposalsData.map(proposal => proposal.description);
             setProposals([...getEachProposalsDescription]);
         } catch (error) {
-            setError(error);
+            setError(error.message.match(/revert (.*)/)[1]);
         }
     };
     

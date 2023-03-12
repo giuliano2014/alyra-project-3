@@ -20111,10 +20111,16 @@
       "links": {},
       "address": "0x61D098Cf19F72e7F473ccC6A37c2A1f6a07070AF",
       "transactionHash": "0xa23fa8bc21c05c213d22e0beca1f80c82aa4ada74f25951a2e512514b7636d56"
+    },
+    "1678716414922": {
+      "events": {},
+      "links": {},
+      "address": "0x873E3FE6486A1804e1551b80437Ae4a5b6F10f81",
+      "transactionHash": "0x73e161a956d25d7f041f39926a0982662fae8fa0c99046f397f8f5cf9978284f"
     }
   },
   "schemaVersion": "3.4.11",
-  "updatedAt": "2023-03-12T06:54:42.717Z",
+  "updatedAt": "2023-03-13T14:07:14.195Z",
   "networkType": "ethereum",
   "devdoc": {
     "kind": "dev",

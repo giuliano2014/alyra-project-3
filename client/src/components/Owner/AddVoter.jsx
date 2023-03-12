@@ -35,13 +35,13 @@ const AddVoter = ({ accounts, contract }) => {
             })
             .on('error', (error, receipt) => {
                 console.log('receipt', receipt);
-                setError(error);
+                setError(error.message.match(/revert (.*)/)[1]);
             });
     };
 
     return (
         <div>
-            {error && <p>{error}</p>}
+            {error}
             {newVoter && <p>New voter {newVoter} have been successfully added</p>}
             <label htmlFor="voter-address">Add a voter</label>
             <input
