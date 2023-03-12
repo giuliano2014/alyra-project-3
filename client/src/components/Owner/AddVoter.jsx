@@ -1,45 +1,52 @@
 import { useEffect, useState } from "react";
 
 const AddVoter = ({ accounts, contract }) => {
-  const [voterAddress, setVoterAddress] = useState("");
+    const [error, setError] = useState();
+    const [newVoter, setNewVoter] = useState(undefined);
+    const [voterAddress, setVoterAddress] = useState("");
 
-  const voterRegisteredEvent = async () => {
-    if (!contract) return;
-    await contract.events.VoterRegistered({ fromBlock: "earliest" })
-      .on('data', event => {
-        console.log('event', event);
-        // console.log('event.returnValues.voterAddress', event.returnValues.voterAddress);
-      })
-      .on('changed', changed => console.log('changed', changed))
-      .on('error', err => console.log('error', err))
-      .on('connected', str => console.log('connected', str))
-  };
+    const voterRegisteredEvent = async () => {
+        if (!contract) return;
 
-  useEffect(() => {
-    voterRegisteredEvent();
-  }, [contract]);
+        await contract.events.VoterRegistered({ fromBlock: "earliest" })
+            .on('data', event => {
+                setNewVoter(event.returnValues.voterAddress);
+            })
+            .on('error', (error, receipt) => {
+                console.log('receipt', receipt);
+                setError(error);
+            });
+    };
 
-  const handleAddVoter = async () => {
-    await contract.methods.addVoter(voterAddress).send({ from: accounts[0] });
-  };
+    useEffect(() => {
+        voterRegisteredEvent();
+    }, [contract]);
 
-  const handleInputChange = (event) => {
-    setVoterAddress(event.target.value);
-  };
+    const handleAddVoter = async () => {
+        if (!contract) return;
+        setNewVoter(undefined);
+        await contract.methods.addVoter(voterAddress).send({ from: accounts[0] });
+    };
 
-  return (
-    <div>
-      <label htmlFor="voterAddress">Add a voter</label>
-      <input
-        id="voterAddress"
-        type="text"
-        placeholder="Address"
-        value={voterAddress}
-        onChange={handleInputChange}
-      />
-      <button onClick={handleAddVoter}>addVoter</button>
-    </div>
-  );
+    const handleInputChange = (event) => {
+        setVoterAddress(event.target.value);
+    };
+
+    return (
+        <div>
+            {error && <p>{error}</p>}
+            {newVoter && <p>New voter {newVoter} have been added</p>}
+            <label htmlFor="voter-address">Add a voter</label>
+            <input
+                id="voter-address"
+                onChange={handleInputChange}
+                placeholder="Voter address"
+                type="text"
+                value={voterAddress}
+            />
+            <button onClick={handleAddVoter}>addVoter</button>
+        </div>
+    );
 };
 
 export default AddVoter;
