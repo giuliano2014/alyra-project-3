@@ -5,24 +5,11 @@ const AddVoter = ({ accounts, contract }) => {
     const [newVoter, setNewVoter] = useState(undefined);
     const [voterAddress, setVoterAddress] = useState("");
 
-    const voterRegisteredEvent = async () => {
-        if (!contract) return;
-
-        await contract.events.VoterRegistered({ fromBlock: "earliest" })
-            .on('data', event => {
-                setNewVoter(event.returnValues.voterAddress);
-            })
-            .on('error', (error, receipt) => {
-                console.log('receipt', receipt);
-                setError(error);
-            });
-    };
-
     useEffect(() => {
         voterRegisteredEvent();
     }, [contract]);
 
-    const handleAddVoter = async () => {
+    const addVoter = async () => {
         if (!contract) return;
 
         if (voterAddress === "") {
@@ -39,10 +26,23 @@ const AddVoter = ({ accounts, contract }) => {
         setVoterAddress(event.target.value);
     };
 
+    const voterRegisteredEvent = async () => {
+        if (!contract) return;
+
+        await contract.events.VoterRegistered({ fromBlock: "earliest" })
+            .on('data', event => {
+                setNewVoter(event.returnValues.voterAddress);
+            })
+            .on('error', (error, receipt) => {
+                console.log('receipt', receipt);
+                setError(error);
+            });
+    };
+
     return (
         <div>
             {error && <p>{error}</p>}
-            {newVoter && <p>New voter {newVoter} have been added</p>}
+            {newVoter && <p>New voter {newVoter} have been successfully added</p>}
             <label htmlFor="voter-address">Add a voter</label>
             <input
                 id="voter-address"
@@ -51,7 +51,7 @@ const AddVoter = ({ accounts, contract }) => {
                 type="text"
                 value={voterAddress}
             />
-            <button onClick={handleAddVoter}>addVoter</button>
+            <button onClick={addVoter}>addVoter</button>
         </div>
     );
 };
