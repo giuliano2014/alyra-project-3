@@ -1,45 +1,59 @@
 import { useEffect, useState } from "react";
 
 const AddVoter = ({ accounts, contract }) => {
-  const [voterAddress, setVoterAddress] = useState("");
+    const [error, setError] = useState();
+    const [newVoter, setNewVoter] = useState(undefined);
+    const [voterAddress, setVoterAddress] = useState("");
 
-  const voterRegisteredEvent = async () => {
-    if (!contract) return;
-    await contract.events.VoterRegistered({ fromBlock: "earliest" })
-      .on('data', event => {
-        console.log('event', event);
-        // console.log('event.returnValues.voterAddress', event.returnValues.voterAddress);
-      })
-      .on('changed', changed => console.log('changed', changed))
-      .on('error', err => console.log('error', err))
-      .on('connected', str => console.log('connected', str))
-  };
+    useEffect(() => {
+        voterRegisteredEvent();
+    }, [contract]);
 
-  useEffect(() => {
-    voterRegisteredEvent();
-  }, [contract]);
+    const addVoter = async () => {
+        if (!contract) return;
 
-  const handleAddVoter = async () => {
-    await contract.methods.addVoter(voterAddress).send({ from: accounts[0] });
-  };
+        if (voterAddress === "") {
+            setError("Please enter a valid voter address");
+            return;
+        }
 
-  const handleInputChange = (event) => {
-    setVoterAddress(event.target.value);
-  };
+        setNewVoter(undefined);
+        await contract.methods.addVoter(voterAddress).send({ from: accounts[0] });
+        setVoterAddress("");
+    };
 
-  return (
-    <div>
-      <label htmlFor="voterAddress">Add a voter</label>
-      <input
-        id="voterAddress"
-        type="text"
-        placeholder="Address"
-        value={voterAddress}
-        onChange={handleInputChange}
-      />
-      <button onClick={handleAddVoter}>addVoter</button>
-    </div>
-  );
+    const handleInputChange = (event) => {
+        setVoterAddress(event.target.value);
+    };
+
+    const voterRegisteredEvent = async () => {
+        if (!contract) return;
+
+        await contract.events.VoterRegistered({ fromBlock: "earliest" })
+            .on('data', event => {
+                setNewVoter(event.returnValues.voterAddress);
+            })
+            .on('error', (error, receipt) => {
+                console.log('receipt', receipt);
+                setError(error);
+            });
+    };
+
+    return (
+        <div>
+            {error && <p>{error}</p>}
+            {newVoter && <p>New voter {newVoter} have been successfully added</p>}
+            <label htmlFor="voter-address">Add a voter</label>
+            <input
+                id="voter-address"
+                onChange={handleInputChange}
+                placeholder="Voter address"
+                type="text"
+                value={voterAddress}
+            />
+            <button onClick={addVoter}>addVoter</button>
+        </div>
+    );
 };
 
 export default AddVoter;
