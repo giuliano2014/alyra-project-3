@@ -24,8 +24,15 @@ const AddVoter = ({ accounts, contract }) => {
 
     const handleAddVoter = async () => {
         if (!contract) return;
+
+        if (voterAddress === "") {
+            setError("Please enter a valid voter address");
+            return;
+        }
+
         setNewVoter(undefined);
         await contract.methods.addVoter(voterAddress).send({ from: accounts[0] });
+        setVoterAddress("");
     };
 
     const handleInputChange = (event) => {
