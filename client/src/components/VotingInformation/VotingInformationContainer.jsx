@@ -1,44 +1,12 @@
-import { useEffect, useState } from "react";
-
 import useEth from "../../contexts/EthContext/useEth";
+import useGetOwnerAddress from "../../hooks/useGetOwnerAddress";
+import useRegisteredVoters from "../../hooks/useRegisteredVoters";
 import ProposalList from "./ProposalList";
 
 const VotingInformationContainer = () => {
 	const { state: { accounts, contract } } = useEth();
-	const [error, setError] = useState();
-	const [isOwner, setIsOwner] = useState(false);
-	const [isVoter, setIsVoter] = useState(false);
-
-	useEffect(() => { 
-		getOwnerAddress();
-		getRegisteredVoters();
-	}, [contract]);
-
-	const getOwnerAddress = async () => {
-		if (!contract) return;
-
-		const ownerAddress = await contract.methods.owner().call();
-		accounts[0] === ownerAddress ? setIsOwner(true) : setIsOwner(false);
-	}
-
-	const getRegisteredVoters = async () => {
-		if (!contract) return;
-
-		try {
-			const events = await contract.getPastEvents('VoterRegistered', {
-				fromBlock: 0,
-				toBlock: 'latest'
-			});
-
-			const isRegisterdVoter = events.some(user => {
-				return user.returnValues.voterAddress === accounts[0];
-			});
-
-			setIsVoter(isRegisterdVoter);
-		} catch (error) {
-			setError(error.message.match(/revert (.*)/)[1]);
-		}
-	};
+	const [isOwner] = useGetOwnerAddress(accounts, contract);
+	const [isVoter, error] = useRegisteredVoters(contract, accounts);
 
 	if (!isVoter && !isOwner ) {
 		return (

@@ -1,6 +1,5 @@
-import { useEffect, useState } from "react";
-
 import useEth from "../../contexts/EthContext/useEth";
+import useGetOwnerAddress from "../../hooks/useGetOwnerAddress";
 import AddVoter from "./AddVoter";
 import EndProposal from "./EndProposal";
 import EndVoting from "./EndVoting";
@@ -10,16 +9,7 @@ import TallyVotes from "./TallyVotes";
 
 const OwnerContainer = () => {
     const { state: { accounts, contract } } = useEth();
-    const [isOwner, setIsOwner] = useState(false);
-
-    const getOwnerAddress = async () => {
-        if (!contract) return;
-
-        const ownerAddress = await contract.methods.owner().call();
-        accounts[0] === ownerAddress ? setIsOwner(true) : setIsOwner(false);
-    }
-
-    useEffect(() => { getOwnerAddress() }, [contract]);
+    const [isOwner] = useGetOwnerAddress(accounts, contract);
 
     if (!isOwner) return null;
 

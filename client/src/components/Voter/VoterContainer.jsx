@@ -1,35 +1,12 @@
-import { useEffect, useState } from "react";
-
 import useEth from "../../contexts/EthContext/useEth";
+import useRegisteredVoters from "../../hooks/useRegisteredVoters";
 import AddProposal from "./AddProposal";
 import GetOneProposal from "./GetOneProposal";
 import SetVote from "./SetVote";
 
 const VoterContainer = () => {
     const { state: { accounts, contract } } = useEth();
-    const [error, setError] = useState();
-    const [isVoter, setIsVoter] = useState(false);
-
-    useEffect(() => { getRegisteredVoters() }, [contract]);
-
-    const getRegisteredVoters = async () => {
-        if (!contract) return;
-    
-        try {
-            const events = await contract.getPastEvents('VoterRegistered', {
-                fromBlock: 0,
-                toBlock: 'latest'
-            });
-
-            const isRegisterdVoter = events.some(user => {
-                return user.returnValues.voterAddress === accounts[0]
-            });
-
-            setIsVoter(isRegisterdVoter);
-        } catch (error) {
-            setError(error.message.match(/revert (.*)/)[1]);
-        }
-    };
+    const [isVoter, error] = useRegisteredVoters(contract, accounts);
 
     if (!isVoter) return null;
 
