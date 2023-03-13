@@ -1,57 +1,34 @@
 import { useState, useEffect } from "react";
 
-const useRegisteredVoters = (contract, accounts) => {
+const useRegisteredVoters = (accounts, contract) => {
+    const [error, setError] = useState();
     const [isVoter, setIsVoter] = useState(false);
-    const [error, setError] = useState("");
 
     useEffect(() => {
-        const getRegisteredVoters = async () => {
-            if (!contract) return;
+        getRegisteredVoters()
+    }, [contract]); // [accounts, contract] ?
 
-            try {
-                const events = await contract.getPastEvents("VoterRegistered", {
-                    fromBlock: 0,
-                    toBlock: "latest",
-                });
+    const getRegisteredVoters = async () => {
+        if (!contract) return;
 
-                const isRegisteredVoter = events.some(
-                    (user) => user.returnValues.voterAddress === accounts[0]
-                );
+        try {
+            const events = await contract.getPastEvents('VoterRegistered', {
+                fromBlock: 0,
+                toBlock: 'latest'
+            });
 
-                setIsVoter(isRegisteredVoter);
-            } catch (error) {
-                setError(error.message.match(/revert (.*)/)[1]);
-            }
-        };
+            const isRegisterdVoter = events.some(user => {
+                return user.returnValues.voterAddress === accounts[0]
+            });
 
-        getRegisteredVoters();
-    }, [contract, accounts]);
+            setIsVoter(isRegisterdVoter);
+        } catch (error) {
+            setError(error.message.match(/revert (.*)/)[1]);
+        }
+    };
 
-    return [isVoter, error];
+    return  [error, isVoter];
+
 };
 
 export default useRegisteredVoters;
-
-// const [error, setError] = useState();
-// const [isVoter, setIsVoter] = useState(false);
-
-// useEffect(() => { getRegisteredVoters() }, [contract]);
-
-// const getRegisteredVoters = async () => {
-//     if (!contract) return;
-
-//     try {
-//         const events = await contract.getPastEvents('VoterRegistered', {
-//             fromBlock: 0,
-//             toBlock: 'latest'
-//         });
-
-//         const isRegisterdVoter = events.some(user => {
-//             return user.returnValues.voterAddress === accounts[0]
-//         });
-
-//         setIsVoter(isRegisterdVoter);
-//     } catch (error) {
-//         setError(error.message.match(/revert (.*)/)[1]);
-//     }
-// };

@@ -6,7 +6,7 @@ import SetVote from "./SetVote";
 
 const VoterContainer = () => {
     const { state: { accounts, contract } } = useEth();
-    const [isVoter, error] = useRegisteredVoters(contract, accounts);
+    const [error, isVoter] = useRegisteredVoters(accounts, contract);
 
     if (!isVoter) return null;
 
@@ -19,9 +19,9 @@ const VoterContainer = () => {
             <GetOneProposal accounts={accounts} contract={contract} />
             <SetVote accounts={accounts} contract={contract} />
             <div>
-            <label htmlFor="voterAddress">Get a specific voter</label>
-            <input id="voterAddress" type="text" placeholder="Address" />
-            <button>getVoter</button>
+                <label htmlFor="voterAddress">Get a specific voter</label>
+                <input id="voterAddress" type="text" placeholder="Address" />
+                <button>getVoter</button>
             </div>
         </div>
     );

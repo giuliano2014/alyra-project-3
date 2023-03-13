@@ -1,5 +1,5 @@
 import useEth from "../../contexts/EthContext/useEth";
-import useGetOwnerAddress from "../../hooks/useGetOwnerAddress";
+import useOwnerAddress from "../../hooks/useOwnerAddress";
 import AddVoter from "./AddVoter";
 import EndProposal from "./EndProposal";
 import EndVoting from "./EndVoting";
@@ -9,7 +9,7 @@ import TallyVotes from "./TallyVotes";
 
 const OwnerContainer = () => {
     const { state: { accounts, contract } } = useEth();
-    const [isOwner] = useGetOwnerAddress(accounts, contract);
+    const [isOwner] = useOwnerAddress(accounts, contract);
 
     if (!isOwner) return null;
 

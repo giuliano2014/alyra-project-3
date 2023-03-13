@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-const useGetOwnerAddress = (accounts, contract) => {
+const useOwnerAddress = (accounts, contract) => {
     const [isOwner, setIsOwner] = useState(false);
 
     useEffect(() => {
@@ -17,4 +17,4 @@ const useGetOwnerAddress = (accounts, contract) => {
     return [isOwner];
 };
 
-export default useGetOwnerAddress;
+export default useOwnerAddress;
