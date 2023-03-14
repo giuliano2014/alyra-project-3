@@ -1,3 +1,6 @@
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import FormGroup from '@mui/material/FormGroup';
 import { useEffect, useState } from "react";
 
 const AddVoter = ({ accounts, contract }) => {
@@ -52,6 +55,21 @@ const AddVoter = ({ accounts, contract }) => {
                 value={voterAddress}
             />
             <button onClick={addVoter}>addVoter</button>
+            <hr />
+            
+
+            <FormGroup>
+    <TextField
+                    required
+                    id="outlined-required"
+                    label="Required"
+                    defaultValue="Hello World"
+                    size="small"
+                />
+    <Button variant="outlined" size="large">Primary</Button>
+  </FormGroup>
+
+            
         </div>
     );
 };
