@@ -2,6 +2,7 @@ import useEth from "../../contexts/EthContext/useEth";
 import useRegisteredVoters from "../../hooks/useRegisteredVoters";
 import AddProposal from "./AddProposal";
 import GetOneProposal from "./GetOneProposal";
+import GetVoter from "./GetVoter";
 import SetVote from "./SetVote";
 
 const VoterContainer = () => {
@@ -18,11 +19,7 @@ const VoterContainer = () => {
             <AddProposal accounts={accounts} contract={contract} />
             <GetOneProposal accounts={accounts} contract={contract} />
             <SetVote accounts={accounts} contract={contract} />
-            <div>
-                <label htmlFor="voterAddress">Get a specific voter</label>
-                <input id="voterAddress" type="text" placeholder="Address" />
-                <button>getVoter</button>
-            </div>
+            <GetVoter accounts={accounts} contract={contract} />
         </div>
     );
 }
