@@ -2,6 +2,7 @@ import useEth from "../../contexts/EthContext/useEth";
 import useOwnerAddress from "../../hooks/useOwnerAddress";
 import useRegisteredVoters from "../../hooks/useRegisteredVoters";
 import ProposalList from "./ProposalList";
+import WinningProposalId from "./WinningProposalId";
 
 const VotingInformationContainer = () => {
 	const { state: { accounts, contract } } = useEth();
@@ -21,7 +22,7 @@ const VotingInformationContainer = () => {
 		<div>
 			<h2>Voting information</h2>
 			{error}
-			<h4>Winning proposal ID : xx</h4>
+			<WinningProposalId accounts={accounts} contract={contract} />
 			{isVoter && <ProposalList accounts={accounts} contract={contract} />}
 		</div>
 	);
