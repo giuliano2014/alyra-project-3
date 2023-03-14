@@ -16,8 +16,9 @@ const OwnerContainer = () => {
     return (
         <div>
             <hr />
-            <h2>Owner</h2>
+            <h4>Owner dashboard</h4>
             <AddVoter accounts={accounts} contract={contract} />
+            <hr />
             <StartProposal accounts={accounts} contract={contract} />
             <EndProposal accounts={accounts} contract={contract} />
             <StartVoting accounts={accounts} contract={contract} />
