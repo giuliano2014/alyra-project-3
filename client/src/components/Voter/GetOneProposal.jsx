@@ -34,7 +34,7 @@ const GetOneProposal = ({ accounts, contract }) => {
     };
 
     return (
-        <Form className="mt-3" >
+        <Form className="mb-4">
             <Form.Group className="mb-3" controlId="proposalId">
                 <Form.Label>Get a specific proposal</Form.Label>
                 <Form.Control
@@ -56,7 +56,7 @@ const GetOneProposal = ({ accounts, contract }) => {
             >Get proposal</Button>
             {isProposalRequested &&
                 <Alert show={proposal} variant="info" className="mt-3">
-                    <Alert.Heading>Proposal ID : {proposalId}</Alert.Heading>
+                    <Alert.Heading>Proposal information</Alert.Heading>
                     <p>Description : {proposal.description}</p>
                     <hr />
                     <p>Vote count : {proposal.voteCount}</p>

@@ -8,7 +8,7 @@ const AddProposal = ({ accounts, contract }) => {
 
     useEffect(() => {
         voterRegisteredEvent();
-    }, [isNewProposal]);
+    }, [contract, isNewProposal]);
 
     const addProposal = () => {
         if (description === "") {
@@ -16,11 +16,14 @@ const AddProposal = ({ accounts, contract }) => {
             return;
         }
 
+        setIsNewProposal(false);
+
         contract.methods.addProposal(description).call({ from: accounts[0] })
             .then(result => {
+                return contract.methods.addProposal(description).send({ from: accounts[0] });
+            })
+            .then(result => {
                 setDescription("");
-                setIsNewProposal(false);
-                contract.methods.addProposal(description).send({ from: accounts[0] });
             })
             .catch(error => {
                 setError(error.message.match(/revert (.*)/)[1]);
@@ -55,7 +58,7 @@ const AddProposal = ({ accounts, contract }) => {
                     <p>New proposal have been successfully added</p>
                 </Alert>
             }
-            <Form>
+            <Form className="mb-4">
                 <Form.Group className="mb-3" controlId="proposalDescription">
                     <Form.Label>Add a proposal</Form.Label>
                     <Form.Control

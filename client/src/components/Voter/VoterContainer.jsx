@@ -14,7 +14,7 @@ const VoterContainer = () => {
     return (
         <div>
             <hr />
-            <h4>Voter dashboard</h4>
+            <h4 className="mb-3">Voter dashboard</h4>
             {error}
             <AddProposal accounts={accounts} contract={contract} />
             <GetOneProposal accounts={accounts} contract={contract} />

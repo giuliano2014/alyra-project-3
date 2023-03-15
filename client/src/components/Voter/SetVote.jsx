@@ -25,7 +25,9 @@ const SetVote = ({ accounts, contract }) => {
     
         contract.methods.setVote(proposalId).call({ from: accounts[0] })
             .then(result => {
-                contract.methods.setVote(proposalId).send({ from: accounts[0] });
+                return contract.methods.setVote(proposalId).send({ from: accounts[0] });
+            })
+            .then(result => {
                 setVoted(true);
             })
             .catch(error => {
@@ -44,7 +46,7 @@ const SetVote = ({ accounts, contract }) => {
                     <p>Your vote has been taken into account</p>
                 </Alert>
             }
-            <Form className="mt-3">
+            <Form className="mb-4">
                 <Form.Group className="mb-3" controlId="setYourVote">
                     <Form.Label>Set your vote</Form.Label>
                     <Form.Control
