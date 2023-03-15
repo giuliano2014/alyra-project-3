@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Button, Form } from 'react-bootstrap';
 
 const StartVoting = ({ accounts, contract }) => {
     const [error, setError] = useState();
@@ -14,10 +15,18 @@ const StartVoting = ({ accounts, contract }) => {
     };
 
     return (
-        <div>
-            <label>Start voting session</label>
-            <button onClick={startVotingSession}>startVotingSession</button>
-            {error}
+        <div className="mt-3">
+            <div>
+                <Button
+                    onClick={startVotingSession}
+                    variant="outline-primary"
+                >Start voting session</Button>
+            </div>
+            {error && 
+                <Form.Text className="text-danger">
+                    {error}
+                </Form.Text>
+            }
         </div>
     );
 }
