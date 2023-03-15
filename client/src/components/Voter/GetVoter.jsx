@@ -55,7 +55,7 @@ const GetVoter = ({ accounts, contract }) => {
     };
 
     return (
-        <Form>
+        <Form className="mt-4">
             <Form.Group className="mb-3" controlId="voterAddress">
                 <Form.Label>Get a specific voter</Form.Label>
                 <Form.Control

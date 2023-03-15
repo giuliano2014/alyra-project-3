@@ -12,7 +12,7 @@ const VotingInformationContainer = () => {
 	if (!isOwner && !isVoter) {
 		return (
 			<>
-				<h6>You are not a voter</h6>
+				<h6>You are not a voter ...</h6>
 				<p className="text-danger">{error}</p>
 			</>
 		);
