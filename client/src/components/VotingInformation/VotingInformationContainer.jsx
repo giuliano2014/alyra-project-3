@@ -12,16 +12,16 @@ const VotingInformationContainer = () => {
 	if (!isOwner && !isVoter) {
 		return (
 			<>
-				{error}
-				<h4>You are not a voter</h4>
+				<h6>You are not a voter</h6>
+				<p className="text-danger">{error}</p>
 			</>
 		);
 	};
 
 	return (
 		<div>
-			<h2>Voting information</h2>
-			{error}
+			<h4>Voting information</h4>
+			<p className="text-danger">{error}</p>
 			<WinningProposalId accounts={accounts} contract={contract} />
 			{isVoter && <ProposalList accounts={accounts} contract={contract} />}
 		</div>
