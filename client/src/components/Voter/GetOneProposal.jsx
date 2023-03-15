@@ -36,7 +36,7 @@ const GetOneProposal = ({ accounts, contract }) => {
     return (
         <Form className="mt-3" >
             <Form.Group className="mb-3" controlId="proposalId">
-                <Form.Label>Get a specific Proposal</Form.Label>
+                <Form.Label>Get a specific proposal</Form.Label>
                 <Form.Control
                     onChange={handleInputChange}
                     placeholder="Proposal ID"
