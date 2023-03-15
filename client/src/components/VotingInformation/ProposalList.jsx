@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import ListGroup from 'react-bootstrap/ListGroup';
 
 const ProposalList = ({ accounts, contract }) => {
     const [error, setError] = useState();
@@ -65,14 +66,17 @@ const ProposalList = ({ accounts, contract }) => {
     
     return (
         <div>
-            <h2>Proposal list</h2>
-            {error}
+            <p className="text-danger">{error}</p>
+            <h6>Proposal list : {proposals.length === 0 && <span>No proposal yet ...</span>}</h6>
             {proposals.length > 0 && 
-                <ul>
+                <ListGroup>
                     {proposals.map((proposal, index) => (
-                        <li key={index}>ID {++index} / Description {proposal}</li>
+                        <ListGroup.Item key={proposal}>
+                            <p className="m-0">ID : {++index}</p>
+                            <p className="m-0">Description : {proposal}</p>
+                        </ListGroup.Item>
                     ))}
-                </ul>
+                </ListGroup>
             }
         </div>
     );

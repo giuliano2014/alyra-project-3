@@ -21,8 +21,8 @@ const WinningProposalId = ({ accounts, contract }) => {
 
 	return (
         <>
-            {error}
-            <h4>Winning proposal ID : {winningProposalId === "0" ? "Voting is still ongoing" : winningProposalId}</h4>
+            <p className="text-danger">{error}</p>
+            <h6>Winning proposal ID : {winningProposalId === "0" ? "Voting is still ongoing ..." : winningProposalId}</h6>
         </>
 	);
 };
