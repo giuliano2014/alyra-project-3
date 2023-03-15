@@ -106,8 +106,8 @@ contract Voting is Ownable {
     }
 
     /**
-     *@dev Fonction permettant à un votant de voter pour une proposition.
-     *@param _id L'identifiant de la proposition pour laquelle le votant vote.
+     * @dev Fonction permettant à un votant de voter pour une proposition.
+     * @param _id L'identifiant de la proposition pour laquelle le votant vote.
      */
     function setVote(uint _id) external onlyVoters {
         require(
@@ -126,7 +126,7 @@ contract Voting is Ownable {
 
     /**
      * @dev Démarre la phase d'enregistrement des propositions.
-     *      Cette fonction ne peut être appelée que par le propriétaire du contrat.
+     * Cette fonction ne peut être appelée que par le propriétaire du contrat.
      * @notice Nécessite que la phase d'enregistrement des électeurs soit terminée.
      * @notice Ajoute une proposition "GENESIS" à l'array de propositions.
      * @notice Émet un événement pour signaler le changement de statut.
@@ -150,7 +150,7 @@ contract Voting is Ownable {
 
     /**
      * @dev Termine la phase d'enregistrement des propositions.
-     *      Cette fonction ne peut être appelée que par le propriétaire du contrat.
+     * Cette fonction ne peut être appelée que par le propriétaire du contrat.
      * @notice Nécessite que la phase d'enregistrement des propositions soit en cours.
      * @notice Émet un événement pour signaler le changement de statut.
      */
@@ -168,7 +168,7 @@ contract Voting is Ownable {
 
     /**
      * @dev Démarre la session de vote.
-     *      Cette fonction ne peut être appelée que par le propriétaire du contrat.
+     * Cette fonction ne peut être appelée que par le propriétaire du contrat.
      * @notice Nécessite que la phase d'enregistrement des propositions soit terminée.
      * @notice Émet un événement pour signaler le changement de statut.
      */
@@ -203,13 +203,13 @@ contract Voting is Ownable {
     }
 
     /**
-    *@dev Cette fonction permet de comptabiliser les votes pour les propositions soumises et de déterminer la proposition gagnante.
-    Ne peut être appelée que par le propriétaire du contrat.
-    La fonction vérifie que le statut actuel du workflow est "VotingSessionEnded".
-    Une fois la proposition gagnante déterminée, son identifiant est stocké dans la variable winningProposalID.
-    Le statut du workflow est mis à jour en "VotesTallied".
-    Un événement WorkflowStatusChange est émis pour notifier les observateurs du changement d'état du workflow.
-    */
+     * @dev Cette fonction permet de comptabiliser les votes pour les propositions soumises et de déterminer la proposition gagnante.
+     * Ne peut être appelée que par le propriétaire du contrat.
+     * La fonction vérifie que le statut actuel du workflow est "VotingSessionEnded".
+     * Une fois la proposition gagnante déterminée, son identifiant est stocké dans la variable winningProposalID.
+     * Le statut du workflow est mis à jour en "VotesTallied".
+     * Un événement WorkflowStatusChange est émis pour notifier les observateurs du changement d'état du workflow.
+     */
     function tallyVotes() external onlyOwner {
         require(
             workflowStatus == WorkflowStatus.VotingSessionEnded,
