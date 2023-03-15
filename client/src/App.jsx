@@ -6,21 +6,19 @@ import VoterContainer from "./components/Voter/VoterContainer";
 import VotingInformationContainer from "./components/VotingInformation/VotingInformationContainer";
 
 const App = () => {
-  return (
-    <EthProvider>
-      <div id="App">
-        <div className="container">
-          <hr />
-          <HeaderContainer />
-          <hr />
-          <VotingInformationContainer />
-          <OwnerContainer />
-          <VoterContainer />
-          <hr />
-        </div>
-      </div>
-    </EthProvider>
-  );
+	return (
+		<EthProvider>
+			<div className="container">
+				<hr />
+				<HeaderContainer />
+				<hr />
+				<VotingInformationContainer />
+				<OwnerContainer />
+				<VoterContainer />
+				<hr />
+			</div>
+		</EthProvider>
+	);
 }
 
 export default App;

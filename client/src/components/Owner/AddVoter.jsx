@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Alert, Button, Form } from 'react-bootstrap';
 
 const AddVoter = ({ accounts, contract }) => {
     const [error, setError] = useState();
@@ -7,7 +8,7 @@ const AddVoter = ({ accounts, contract }) => {
 
     useEffect(() => {
         voterRegisteredEvent();
-    }, [contract]);
+    }, [contract, newVoter]);
 
     const addVoter = async () => {
         if (!contract) return;
@@ -40,19 +41,38 @@ const AddVoter = ({ accounts, contract }) => {
     };
 
     return (
-        <div>
-            {error}
-            {newVoter && <p>New voter {newVoter} have been successfully added</p>}
-            <label htmlFor="voter-address">Add a voter</label>
-            <input
-                id="voter-address"
-                onChange={handleInputChange}
-                placeholder="Voter address"
-                type="text"
-                value={voterAddress}
-            />
-            <button onClick={addVoter}>addVoter</button>
-        </div>
+        <>
+            {newVoter &&
+                <Alert
+                    dismissible
+                    onClose={() => setNewVoter(undefined)}
+                    variant="success"
+                >
+                    <p>New voter {newVoter} have been successfully added</p>
+                </Alert>
+            }
+            <Form>
+                <Form.Group className="mb-3" controlId="voterAddress">
+                    <Form.Label>Add a voter</Form.Label>
+                    <Form.Control
+                        onChange={handleInputChange}
+                        placeholder="Voter address"
+                        type="text"
+                        value={voterAddress}
+                    />
+                    {error && 
+                        <Form.Text className="text-danger">
+                            {error}
+                        </Form.Text>
+                    }
+                </Form.Group>
+                <Button
+                    onClick={addVoter}
+                    type="button"
+                    variant="primary"
+                >Add</Button>
+            </Form>
+        </>
     );
 };
 
