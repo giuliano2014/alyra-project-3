@@ -13,7 +13,7 @@ const VotingInformationContainer = () => {
 		return (
 			<>
 				<h6>You are not a voter ...</h6>
-				<p className="text-danger">{error}</p>
+				{error && <p className="text-danger">{error}</p>}
 			</>
 		);
 	};
@@ -21,7 +21,7 @@ const VotingInformationContainer = () => {
 	return (
 		<div>
 			<h4>Voting information</h4>
-			<p className="text-danger">{error}</p>
+			{error && <p className="text-danger">{error}</p>}
 			<WinningProposalId accounts={accounts} contract={contract} />
 			{isVoter && <ProposalList accounts={accounts} contract={contract} />}
 		</div>
