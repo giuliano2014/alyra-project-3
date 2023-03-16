@@ -45,15 +45,6 @@ const EthProvider = ({ children }) => {
     const handleChange = () => {
       init(state.artifact);
     };
-    if (window.ethereum) {
-      events.forEach(e => window.ethereum.on(e, handleChange));
-    }
-    return () => {
-      if (window.ethereum) {
-        events.forEach(e => window.ethereum.removeListener(e, handleChange));
-      }
-
-    };
 
   }, [init, state.artifact]);
 
