@@ -7,14 +7,13 @@ const HeaderContainer = () => {
 	const [currentAddress, setCurrentAddress] = useState();
 
 	useEffect(() => {
-		getAccounts();
+		getConnectedAccount();
 	}, [accounts]);
 
-	async function getAccounts() {
-		const addressValue = await (accounts[0]);
-		const formattedAddress = `${addressValue.slice(0, 4)}xx${addressValue.slice(-4)}`;
-		console.log(formattedAddress)
-		setCurrentAddress(formattedAddress)
+	const getConnectedAccount = async () => {
+		const connectedAddress = await accounts[0];
+		const formattedConnectedAddress = `${connectedAddress.slice(0, 5)}...${connectedAddress.slice(-4)}`;
+		setCurrentAddress(formattedConnectedAddress);
 	}
 	return (
 		<Navbar bg="primary" variant="dark">
@@ -23,8 +22,7 @@ const HeaderContainer = () => {
 				<Navbar.Toggle />
 				<Navbar.Collapse className="justify-content-end">
 					<Navbar.Text>
-						{currentAddress}
-					</Navbar.Text>
+						{currentAddress ? `Connected account : ${currentAddress}` : "No account connected"}					</Navbar.Text>
 				</Navbar.Collapse>
 			</Container>
 		</Navbar>
