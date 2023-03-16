@@ -54,7 +54,6 @@ const EthProvider = ({ children }) => {
       }
 
     };
-
   }, [init, state.artifact]);
 
   return (

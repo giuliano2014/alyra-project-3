@@ -1,6 +1,22 @@
-import {Container, Navbar} from 'react-bootstrap';
+import { useEffect, useState } from "react";
+import { Container, Navbar } from 'react-bootstrap';
+
+import useEth from "../../contexts/EthContext/useEth";
 
 const HeaderContainer = () => {
+	const { state: { accounts } } = useEth();
+	const [currentAddress, setCurrentAddress] = useState();
+
+	useEffect(() => {
+		getConnectedAccount();
+	}, [accounts]);
+
+	const getConnectedAccount = async () => {
+		const connectedAddress = await accounts[0];
+		const formattedConnectedAddress = `${connectedAddress.slice(0, 5)}...${connectedAddress.slice(-4)}`;
+		setCurrentAddress(formattedConnectedAddress);
+	}
+
 	return (
 		<Navbar bg="primary" variant="dark">
 			<Container>
@@ -8,7 +24,7 @@ const HeaderContainer = () => {
 				<Navbar.Toggle />
 				<Navbar.Collapse className="justify-content-end">
 					<Navbar.Text>
-						User logged : 0x000...
+						{currentAddress ? `Connected account : ${currentAddress}` : "No account connected"}
 					</Navbar.Text>
 				</Navbar.Collapse>
 			</Container>
