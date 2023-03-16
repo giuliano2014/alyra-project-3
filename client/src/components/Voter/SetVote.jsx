@@ -39,6 +39,7 @@ const SetVote = ({ accounts, contract }) => {
         <>
             {voted &&
                 <Alert
+                    className="mt-4"
                     dismissible
                     onClose={handleCloseAlert}
                     variant="success"

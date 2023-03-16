@@ -51,6 +51,7 @@ const AddProposal = ({ accounts, contract }) => {
         <>
             {isNewProposal &&
                 <Alert
+                    className="mt-4"
                     dismissible
                     onClose={() => setIsNewProposal(false)}
                     variant="success"
