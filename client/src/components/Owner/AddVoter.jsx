@@ -44,6 +44,7 @@ const AddVoter = ({ accounts, contract }) => {
         <>
             {newVoter &&
                 <Alert
+                    className="mt-4"
                     dismissible
                     onClose={() => setNewVoter(undefined)}
                     variant="success"
