@@ -2,12 +2,13 @@
 pragma solidity 0.8.18;
 
 import "../node_modules/@openzeppelin/contracts/access/Ownable.sol";
+import "../node_modules/@openzeppelin/contracts/security/ReentrancyGuard.sol";
 
 /**
  * @title Voting
  * @dev Ce contrat permet la création et le vote sur des propositions, ainsi que le comptage des votes.
  */
-contract Voting is Ownable {
+contract Voting is Ownable, ReentrancyGuard {
     uint public winningProposalID;
 
     struct Voter {
@@ -210,7 +211,7 @@ contract Voting is Ownable {
      * Le statut du workflow est mis à jour en "VotesTallied".
      * Un événement WorkflowStatusChange est émis pour notifier les observateurs du changement d'état du workflow.
      */
-    function tallyVotes() external onlyOwner {
+    function tallyVotes() external nonReentrant onlyOwner {
         require(
             workflowStatus == WorkflowStatus.VotingSessionEnded,
             "Current status is not voting session ended"
