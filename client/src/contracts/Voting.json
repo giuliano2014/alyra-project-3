@@ -19617,12 +19617,18 @@
     "1678959574988": {
       "events": {},
       "links": {},
-      "address": "0xe8063B011e925b3e89Ec642C274015D99b6c996C",
-      "transactionHash": "0x9358f36f165c94eb16f02dadcf57099d8aa6e26fa241621252e4ddc9d7e91a17"
+      "address": "0xeF1ffb40d23A3f97605feAB211fDDB803Cde0e6D",
+      "transactionHash": "0x8a364055fcdde4e60e78a4c21fc17817aea1ee2e4af28e6c324dea26ee281590"
+    },
+    "1678971154319": {
+      "events": {},
+      "links": {},
+      "address": "0xC1C306f7004eB959993b5260768398A667010504",
+      "transactionHash": "0x31eec426d00f2cd23b67e64ab37bb913b2da1533ad6033840446eaec65dc542c"
     }
   },
   "schemaVersion": "3.4.11",
-  "updatedAt": "2023-03-16T09:40:20.114Z",
+  "updatedAt": "2023-03-16T12:52:53.181Z",
   "networkType": "ethereum",
   "devdoc": {
     "details": "Ce contrat permet la création et le vote sur des propositions, ainsi que le comptage des votes.",
