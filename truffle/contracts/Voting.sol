@@ -211,7 +211,7 @@ contract Voting is Ownable, ReentrancyGuard {
      * Le statut du workflow est mis à jour en "VotesTallied".
      * Un événement WorkflowStatusChange est émis pour notifier les observateurs du changement d'état du workflow.
      */
-    function tallyVotes() external nonReentrant onlyOwner {
+    function tallyVotes() external onlyOwner nonReentrant {
         require(
             workflowStatus == WorkflowStatus.VotingSessionEnded,
             "Current status is not voting session ended"

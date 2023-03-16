@@ -1,5 +1,6 @@
-import { Container, Navbar } from 'react-bootstrap';
 import { useEffect, useState } from "react";
+import { Container, Navbar } from 'react-bootstrap';
+
 import useEth from "../../contexts/EthContext/useEth";
 
 const HeaderContainer = () => {
@@ -15,6 +16,7 @@ const HeaderContainer = () => {
 		const formattedConnectedAddress = `${connectedAddress.slice(0, 5)}...${connectedAddress.slice(-4)}`;
 		setCurrentAddress(formattedConnectedAddress);
 	}
+
 	return (
 		<Navbar bg="primary" variant="dark">
 			<Container>
@@ -22,7 +24,8 @@ const HeaderContainer = () => {
 				<Navbar.Toggle />
 				<Navbar.Collapse className="justify-content-end">
 					<Navbar.Text>
-						{currentAddress ? `Connected account : ${currentAddress}` : "No account connected"}					</Navbar.Text>
+						{currentAddress ? `Connected account : ${currentAddress}` : "No account connected"}
+					</Navbar.Text>
 				</Navbar.Collapse>
 			</Container>
 		</Navbar>
