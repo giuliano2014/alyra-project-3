@@ -15,7 +15,7 @@ const TallyVotes = ({ accounts, contract }) => {
     };
 
     return (
-        <div className="mt-3">
+        <div className="mt-4">
             <div>
                 <Button
                     onClick={tallyVotes}

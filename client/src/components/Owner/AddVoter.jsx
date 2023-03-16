@@ -51,7 +51,7 @@ const AddVoter = ({ accounts, contract }) => {
                     <p>New voter {newVoter} have been successfully added</p>
                 </Alert>
             }
-            <Form>
+            <Form className="mt-4">
                 <Form.Group className="mb-3" controlId="voterAddress">
                     <Form.Label>Add a voter</Form.Label>
                     <Form.Control

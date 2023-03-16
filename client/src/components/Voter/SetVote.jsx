@@ -1,8 +1,15 @@
 import { useState } from "react";
+import { Alert, Button, Form } from 'react-bootstrap';
 
 const SetVote = ({ accounts, contract }) => {
     const [error, setError] = useState();
     const [proposalId, setProposalId] = useState("");
+    const [voted, setVoted] = useState(false);
+
+    const handleCloseAlert = () => {
+        setVoted(false);
+        setProposalId("");
+    };
 
     const handleInputChange = (event) => {
         if (/^\d+$|^$/.test(event.target.value)) {
@@ -12,13 +19,16 @@ const SetVote = ({ accounts, contract }) => {
 
     const setVote = () => {
         if (!proposalId) {
-            alert("Please enter a correct proposal ID");
+            setError("Please enter a correct proposal ID");
             return;
         }
     
         contract.methods.setVote(proposalId).call({ from: accounts[0] })
             .then(result => {
-                contract.methods.setVote(proposalId).send({ from: accounts[0] });
+                return contract.methods.setVote(proposalId).send({ from: accounts[0] });
+            })
+            .then(result => {
+                setVoted(true);
             })
             .catch(error => {
                 setError(error.message.match(/revert (.*)/)[1]);
@@ -26,18 +36,38 @@ const SetVote = ({ accounts, contract }) => {
     };
 
     return (
-        <div>
-            <label htmlFor="set-your-vote">Set your vote</label>
-            <input
-                id="set-your-vote"
-                onChange={handleInputChange}
-                placeholder="Proposal ID"
-                type="text"
-                value={proposalId}
-            />
-            <button onClick={setVote}>setVote</button>
-            {error}
-        </div>
+        <>
+            {voted &&
+                <Alert
+                    dismissible
+                    onClose={handleCloseAlert}
+                    variant="success"
+                >
+                    <p>Your vote has been taken into account</p>
+                </Alert>
+            }
+            <Form className="mt-4">
+                <Form.Group className="mb-3" controlId="setYourVote">
+                    <Form.Label>Set your vote</Form.Label>
+                    <Form.Control
+                        onChange={handleInputChange}
+                        placeholder="Proposal ID"
+                        type="text"
+                        value={proposalId}
+                    />
+                    {error && 
+                        <Form.Text className="text-danger">
+                            {error}
+                        </Form.Text>
+                    }
+                </Form.Group>
+                <Button
+                    onClick={setVote}
+                    type="button"
+                    variant="primary"
+                >Vote</Button>
+            </Form>
+        </>
     );
 };
 
