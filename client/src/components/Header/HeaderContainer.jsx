@@ -12,6 +12,8 @@ const HeaderContainer = () => {
 	}, [accounts]);
 
 	const getConnectedAccount = async () => {
+		if (!accounts) return;
+
 		const connectedAddress = await accounts[0];
 		const formattedConnectedAddress = `${connectedAddress.slice(0, 5)}...${connectedAddress.slice(-4)}`;
 		setCurrentAddress(formattedConnectedAddress);
