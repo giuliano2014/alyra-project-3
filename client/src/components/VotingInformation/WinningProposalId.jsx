@@ -5,7 +5,11 @@ const WinningProposalId = ({ accounts, contract }) => {
     const [winningProposalId, setWinningProposalId] = useState();
 
     useEffect(() => {
-        getWinningProposalId();
+        window.addEventListener("tallyVotesEvent", tallyVotesEventCallback);
+
+        return () => {
+            window.removeEventListener("tallyVotesEvent", tallyVotesEventCallback);
+        };
     }, [accounts, contract]);
 
     const getWinningProposalId = async () => {
@@ -19,10 +23,20 @@ const WinningProposalId = ({ accounts, contract }) => {
         }
     };
 
+    const tallyVotesEventCallback = event => {
+        if (event.done) {
+            getWinningProposalId();
+        }
+
+        if (!event.done) {
+            setWinningProposalId();
+        }
+    };
+
 	return (
         <>
             <p className="text-danger">{error}</p>
-            <h6>Winning proposal ID : {winningProposalId === "0" ? "Voting is still ongoing ..." : winningProposalId}</h6>
+            <h6>Winning proposal ID : {winningProposalId ??  "Voting is still ongoing ..."}</h6>
         </>
 	);
 };

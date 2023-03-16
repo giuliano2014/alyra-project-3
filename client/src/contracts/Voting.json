@@ -20237,10 +20237,16 @@
       "links": {},
       "address": "0xeF1ffb40d23A3f97605feAB211fDDB803Cde0e6D",
       "transactionHash": "0x8a364055fcdde4e60e78a4c21fc17817aea1ee2e4af28e6c324dea26ee281590"
+    },
+    "1678971154319": {
+      "events": {},
+      "links": {},
+      "address": "0xC1C306f7004eB959993b5260768398A667010504",
+      "transactionHash": "0x31eec426d00f2cd23b67e64ab37bb913b2da1533ad6033840446eaec65dc542c"
     }
   },
   "schemaVersion": "3.4.11",
-  "updatedAt": "2023-03-16T06:25:07.557Z",
+  "updatedAt": "2023-03-16T12:52:53.181Z",
   "networkType": "ethereum",
   "devdoc": {
     "details": "Ce contrat permet la création et le vote sur des propositions, ainsi que le comptage des votes.",
