@@ -46,7 +46,7 @@ const SetVote = ({ accounts, contract }) => {
                     <p>Your vote has been taken into account</p>
                 </Alert>
             }
-            <Form className="mb-4">
+            <Form className="mt-4">
                 <Form.Group className="mb-3" controlId="setYourVote">
                     <Form.Label>Set your vote</Form.Label>
                     <Form.Control

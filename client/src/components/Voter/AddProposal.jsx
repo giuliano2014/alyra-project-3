@@ -58,7 +58,7 @@ const AddProposal = ({ accounts, contract }) => {
                     <p>New proposal have been successfully added</p>
                 </Alert>
             }
-            <Form className="mb-4">
+            <Form className="mt-4">
                 <Form.Group className="mb-3" controlId="proposalDescription">
                     <Form.Label>Add a proposal</Form.Label>
                     <Form.Control

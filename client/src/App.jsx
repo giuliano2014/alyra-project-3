@@ -9,13 +9,12 @@ const App = () => {
 	return (
 		<EthProvider>
 			<div className="container">
-				<hr />
 				<HeaderContainer />
-				<hr />
-				<VotingInformationContainer />
-				<OwnerContainer />
-				<VoterContainer />
-				<hr />
+				<div className="mt-5 mb-5">
+					<VotingInformationContainer />
+					<OwnerContainer />
+					<VoterContainer />
+				</div>
 			</div>
 		</EthProvider>
 	);

@@ -34,7 +34,7 @@ const GetOneProposal = ({ accounts, contract }) => {
     };
 
     return (
-        <Form className="mb-4">
+        <Form className="mt-4">
             <Form.Group className="mb-3" controlId="proposalId">
                 <Form.Label>Get a specific proposal</Form.Label>
                 <Form.Control
