@@ -66,7 +66,7 @@ const ProposalList = ({ accounts, contract }) => {
     
     return (
         <div>
-            <p className="text-danger">{error}</p>
+            {error && <p className="text-danger">{error}</p>}
             <h6>Proposal list : {proposals.length === 0 && <span>No proposal yet ...</span>}</h6>
             {proposals.length > 0 && 
                 <ListGroup>
